@@ -16,7 +16,7 @@ value = instrument.read_register(8001, 0, 3, False)  # Registernumber, number of
 switchPositionEnum = { 0: 'nepritomnost', 1: 'nizke', 2: 'normalni', 3: 'vysoke' }
 print('Stupen vykonu:', value, '(' + switchPositionEnum[value] + ')')
 
-value = instrument.read_register(4036, 0, 4, True)  # Registernumber, number of decimals, function code
+value = instrument.read_register(4036, 0, 4, True)
 print('Privodni teplota:', value / 10, 'C')
 
 value = instrument.read_register(4046, 0, 4, True)
@@ -56,7 +56,7 @@ value = instrument.read_register(4060, 0, 4, False)
 preheaterStateEnum = { 0: 'inicializovat', 1: 'neaktivni', 2: 'aktivni', 3: 'testovaci rezim' }
 print('Stav predehrivace:', preheaterStateEnum[value])
 
-value = instrument.read_register(4060, 0, 4, False)
+value = instrument.read_register(4061, 0, 4, False)
 print('Vykon predehrivace:', value, '%')
 
 value = instrument.read_register(6033, 0, 3, False)
