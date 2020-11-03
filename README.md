@@ -1,5 +1,30 @@
 # Brink Flair 300 Modbus control
 
+##### Hardware:
+Raspberry Pi Model 3B+
+
+##### Operacni system:
+https://www.openhab.org/docs/installation/openhabian.html
+
+    [14:48:16] openhabian@openHABianPi:~/bin$ lsb_release -a
+    No LSB modules are available.
+    Distributor ID: Raspbian
+    Description:    Raspbian GNU/Linux 9.8 (stretch)
+    Release:        9.8
+    Codename:       stretch
+    
+    [14:54:40] openhabian@openHABianPi:~/bin$ hostnamectl
+       Static hostname: openHABianPi
+             Icon name: computer
+            Machine ID: e278d9daa394410b8bcf44d5cbf0d734
+               Boot ID: 95082e508e5047f8a7b7f52461d7139b
+      Operating System: Raspbian GNU/Linux 9 (stretch)
+                Kernel: Linux 4.14.98-v7+
+          Architecture: arm
+
+##### Pouzity prevodnik:
+https://arduino-shop.cz/arduino/1171-prevodnik-usb-na-rs485-chip-ch340c.html
+
 ##### Informace o USB zarizenich:
     lsusb
 
