@@ -4,7 +4,8 @@
 Raspberry Pi Model 3B+
 
 ##### Operacni system:
-https://www.openhab.org/docs/installation/openhabian.html
+https://www.openhab.org/docs/installation/openhabian.html \
+Version: 2.5.10 (Build)
 
     [14:48:16] openhabian@openHABianPi:~/bin$ lsb_release -a
     No LSB modules are available.
@@ -43,11 +44,14 @@ https://community.openhab.org/t/brink-renovent-excellent-300-air-ventilation-int
 
 ## Cteni a zapis hodnot 
 
-##### Privodni teplota (stupne C, vydelit 10):
+##### Teplota privodniho vzduchu (stupne C, vydelit 10):
     mbpoll -a 20 -b 19200 -r 4036 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
 
-##### Odvodni teplota (stupne C, vydelit 10):
+##### Teplota odpadniho vzduchu (stupne C, vydelit 10):
     mbpoll -a 20 -b 19200 -r 4046 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+
+##### Venkovni teplota (stupne C, vydelit 10):
+     mbpoll -a 20 -b 19200 -r 4081 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
 
 ##### Vstupni tlak (Pa, vydelit 10):
     mbpoll -a 20 -b 19200 -r 4023 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
@@ -101,7 +105,7 @@ https://community.openhab.org/t/brink-renovent-excellent-300-air-ventilation-int
     # Hodnota je uvedena v procentech; 0 % znamená, že nebyla použita žádná korekce
 
 ##### Rezim bypassu:
-    mbpoll -a 20 -b 19200 -r 6100 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+    mbpoll -a 20 -b 19200 -r 6100 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
 
     # 0: Automatický 1: Uzavřený obtok 2: Otevřený obtok
 
@@ -120,6 +124,28 @@ https://community.openhab.org/t/brink-renovent-excellent-300-air-ventilation-int
 
     # 0: nepřítomnost 1: nízké 2: normální 3: vysoké
     # Ovládání ModBus je nutné nastavit na 1 (přepínač)
+
+##### Prutok na jednotlive stupne:
+    # stupen 0 (nepritomnost):
+    mbpoll -a 20 -b 19200 -r 6000 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+
+    # stupen 1 (nizky):
+    mbpoll -a 20 -b 19200 -r 6001 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+
+    # stupen 2 (stredni):
+    mbpoll -a 20 -b 19200 -r 6002 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+
+    # stupen 3 (vysoky):
+    mbpoll -a 20 -b 19200 -r 6003 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+
+##### Vlhkost vzduchu na vstupu:
+    mbpoll -a 20 -b 19200 -r 4037 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+
+##### Vlhkost vzduchu na vystupu:
+    mbpoll -a 20 -b 19200 -r 4047 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0    
+
+##### Vyuziti filtru ve dnech
+    mbpoll -a 20 -b 19200 -r 4115 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 
 
 ##### Požadované nastavení průtoku vzduchu:
     mbpoll -a 20 -b 19200 -r 8002 -t 4 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 200
