@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import minimalmodbus
+import math
 
 instrument = minimalmodbus.Instrument('/dev/ttyUSB0', 20)  # port name, slave address (in decimal)
 
@@ -13,7 +14,7 @@ instrument.mode = minimalmodbus.MODE_RTU # rtu or ascii mode
 instrument.clear_buffers_before_each_transaction = True
 
 value = instrument.read_register(8001, 0, 3, False)  # Registernumber, number of decimals, function code
-switchPositionEnum = { 0: 'nepritomnost', 1: 'nizke', 2: 'normalni', 3: 'vysoke' }
+switchPositionEnum = { 0: 'nepritomnost', 1: 'nizky', 2: 'stredni', 3: 'vysoky' }
 print('Stupen vykonu:', value, '(' + switchPositionEnum[value] + ')')
 
 value = instrument.read_register(4036, 0, 4, True)
@@ -68,3 +69,18 @@ print('Odchylka nevyvazenosti privodu:', value, '%')
 
 value = instrument.read_register(6036, 0, 3, False)
 print('Odchylka nevyvazenosti odvodu:', value, '%')
+
+value = instrument.read_register(6000, 0, 3, False)
+print('Prutok pro stupen 0 (nepritomnost):', value, 'm3')
+
+value = instrument.read_register(6001, 0, 3, False)
+print('Prutok pro stupen 1 (nizky):', value, 'm3')
+
+value = instrument.read_register(6002, 0, 3, False)
+print('Prutok pro stupen 2 (stredni):', value, 'm3')
+
+value = instrument.read_register(6003, 0, 3, False)
+print('Prutok pro stupen 3 (vysoky):', value, 'm3')
+
+value = instrument.read_register(4115, 0, 4, False)
+print('Pouziti filtru:', math.floor(value / 24), 'dni')

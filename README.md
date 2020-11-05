@@ -39,6 +39,8 @@ https://minimalmodbus.readthedocs.io/en/master/readme.html
 https://www.storc.cz/wp-content/uploads/2018/11/Flair_325.pdf \
 strana 53
 
+https://www.brinkclimatesystems.nl/getattachment/ff69a0ac-80a3-4070-8731-8f70e8cca320
+
 ##### Implementace v openHAB:
 https://community.openhab.org/t/brink-renovent-excellent-300-air-ventilation-integration/91373/6
 
@@ -144,7 +146,7 @@ https://community.openhab.org/t/brink-renovent-excellent-300-air-ventilation-int
 ##### Vlhkost vzduchu na vystupu:
     mbpoll -a 20 -b 19200 -r 4047 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0    
 
-##### Vyuziti filtru ve dnech
+##### Pouziti filtru v hodinach
     mbpoll -a 20 -b 19200 -r 4115 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 
 
 ##### Požadované nastavení průtoku vzduchu:
