@@ -10,10 +10,10 @@ Ovladani rekuperacni jednotky Brink Flair 300 pres protokol Modbus.
 | Parity:                | Even            |
 | Stop bits:             | 1               |
 
-#### Hardware:
+### Hardware:
 Raspberry Pi Model 3B+
 
-#### Operacni system:
+### Operacni system:
 https://www.openhab.org/docs/installation/openhabian.html \
 Version: 2.5.10 (Build)
 
@@ -33,10 +33,10 @@ Version: 2.5.10 (Build)
                 Kernel: Linux 4.14.98-v7+
           Architecture: arm
 
-#### Pouzity prevodnik:
+### Pouzity prevodnik:
 https://arduino-shop.cz/arduino/1171-prevodnik-usb-na-rs485-chip-ch340c.html
 
-#### Informace o USB zarizenich:
+### Informace o USB zarizenich:
     [00:06:29] openhabian@openHABianPi:~$ ll /dev | grep ttyUSB
     crw-rw----  1 root dialout 188,   0 Nov  7 00:06 ttyUSB0
 
@@ -49,25 +49,25 @@ https://arduino-shop.cz/arduino/1171-prevodnik-usb-na-rs485-chip-ch340c.html
 
 Cesta `/dev/ttyUSB0` se pak pouziva jako device/port pro komunikaci pres Modbus.
 
-#### Command line nastroj mbpoll:
+### Command line nastroj mbpoll:
 https://github.com/epsilonrt/mbpoll
 
-#### Python knihovna MinimalModbus:
+### Python knihovna MinimalModbus:
 https://minimalmodbus.readthedocs.io/en/master/readme.html
 
-#### Specifikace prikazu:
+### Specifikace prikazu:
  * https://www.storc.cz/wp-content/uploads/2018/11/Flair_325.pdf \
 strana 53, spousta adres tam ale neni
 
  * https://www.brinkclimatesystems.nl/getattachment/ff69a0ac-80a3-4070-8731-8f70e8cca320
 
-#### openHAB Modbus binding:
+### openHAB Modbus binding:
 https://www.openhab.org/addons/bindings/modbus/
 
-#### Implementace v openHAB pro jednotku Brink Renovent Excellent 300:
+### Implementace v openHAB pro jednotku Brink Renovent Excellent 300:
 https://community.openhab.org/t/brink-renovent-excellent-300-air-ventilation-integration/91373/6
 
-#### Implementace
+### Implementace
 
 Cteni a zapis dat pres prikazovou radku pres nastroj [mbpoll](https://github.com/epsilonrt/mbpoll) je popsana v souboru [commands.md](commands.md).
 
@@ -77,5 +77,5 @@ Implementace v openHABu pres [Modbus Binding](https://www.openhab.org/addons/bin
 
 Prehled hodnot pro cteni/zapis je v tabulce [properties.csv](properties.csv).
 
-#### Ukazka zobrazeni v openHAB Basic UI
+### Ukazka zobrazeni v openHAB Basic UI
 ![zobrazeni v openHAB Basic UI](openhab-ui.png)
