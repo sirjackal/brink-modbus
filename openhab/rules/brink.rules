@@ -1,0 +1,40 @@
+import org.eclipse.smarthome.core.types.RefreshType
+
+// rule "Brink goes online"
+// when
+// 	Thing "modbus:data:cdccf036" changed to ONLINE
+// then
+// 	BrinkControlMode.sendCommand("1"); // 1: ovladaci spinac Modbus
+// end
+
+// rule "Release brink"
+// when
+//    System shuts down
+// then
+//    BrinkControlMode.sendCommand("0"); // 0: ovladani Modbus vypnute
+// end
+
+// refresh more frequently to give better feedback in UI
+rule "Refresh after power level change"
+when
+	Item BrinkPowerLevel received command or Item BrinkFlowrateValue received command
+then
+	if (receivedCommand != RefreshType.REFRESH) {
+		// Update more frequently for a short while, to get
+		// refreshed data after the newly received command
+	    var i = 1;
+		while ((i = i + 1) < 20) {
+			createTimer(now.plusSeconds(i), [|
+				BrinkFlowrateSupply.sendCommand(RefreshType.REFRESH)
+				BrinkFlowrateExhaust.sendCommand(RefreshType.REFRESH)
+			])
+		}
+	}
+end
+
+// rule "Send mail filter needs cleaning"
+// when
+//     Item BrinkFilterState changed to 1
+// then
+// 		sendMail("krepskyj@centrum.cz", "Brink Flair 300 filters need cleaning", "")
+// end

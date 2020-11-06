@@ -1,5 +1,15 @@
 # Brink Flair 300 Modbus control
 
+## Ovladani rekuperacni jednotky Brink Flair 300 pres protokol Modbus
+
+| Parametry spojeni    |                 |
+|------------------------|-----------------|
+| Protocol version:      | RTU             |
+| Baudrate:              | 19k2 (19200 Bd) |
+| Default slave address: | 20              |
+| Parity:                | Even            |
+| Stop bits:             | 1               |
+
 ##### Hardware:
 Raspberry Pi Model 3B+
 
@@ -26,8 +36,18 @@ Version: 2.5.10 (Build)
 ##### Pouzity prevodnik:
 https://arduino-shop.cz/arduino/1171-prevodnik-usb-na-rs485-chip-ch340c.html
 
-##### Informace o USB zarizenich:
-    lsusb
+###### Informace o USB zarizenich:
+    [00:06:29] openhabian@openHABianPi:~$ ll /dev | grep ttyUSB
+    crw-rw----  1 root dialout 188,   0 Nov  7 00:06 ttyUSB0
+
+    [23:28:58] openhabian@openHABianPi:~$ lsusb
+    Bus 001 Device 009: ID 1a86:7523 QinHeng Electronics HL-340 USB-Serial adapter
+    Bus 001 Device 004: ID 0424:7800 Standard Microsystems Corp.
+    Bus 001 Device 003: ID 0424:2514 Standard Microsystems Corp. USB 2.0 Hub
+    Bus 001 Device 002: ID 0424:2514 Standard Microsystems Corp. USB 2.0 Hub
+    Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+Cesta `/dev/ttyUSB0` se pak pouziva jako device/port pro komunikaci pres Modbus.
 
 ##### Command line nastroj mbpoll:
 https://github.com/epsilonrt/mbpoll
@@ -36,126 +56,23 @@ https://github.com/epsilonrt/mbpoll
 https://minimalmodbus.readthedocs.io/en/master/readme.html
 
 ##### Specifikace prikazu:
-https://www.storc.cz/wp-content/uploads/2018/11/Flair_325.pdf \
-strana 53
+ * https://www.storc.cz/wp-content/uploads/2018/11/Flair_325.pdf \
+strana 53, spousta adres tam ale neni
 
-https://www.brinkclimatesystems.nl/getattachment/ff69a0ac-80a3-4070-8731-8f70e8cca320
+ * https://www.brinkclimatesystems.nl/getattachment/ff69a0ac-80a3-4070-8731-8f70e8cca320
 
-##### Implementace v openHAB:
+##### openHAB Modbus binding:
+https://www.openhab.org/addons/bindings/modbus/
+
+##### Implementace v openHAB pro jednotku Brink Renovent Excellent 300:
 https://community.openhab.org/t/brink-renovent-excellent-300-air-ventilation-integration/91373/6
 
-## Cteni a zapis hodnot 
+### Implementace
 
-##### Teplota privodniho vzduchu (stupne C, vydelit 10):
-    mbpoll -a 20 -b 19200 -r 4036 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+Cteni a zapis dat pres prikazovou radku pres nastroj [mbpoll](https://github.com/epsilonrt/mbpoll) je popsana v souboru [commands.md](commands.md).
 
-##### Teplota odpadniho vzduchu (stupne C, vydelit 10):
-    mbpoll -a 20 -b 19200 -r 4046 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+Cteni dat v python skriptu prostrednictvim knihovny [MinimalModbus](https://minimalmodbus.readthedocs.io/en/master/readme.html) je v souboru [brink.py](brink.py).
 
-##### Venkovni teplota (stupne C, vydelit 10):
-     mbpoll -a 20 -b 19200 -r 4081 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
+Implementace v openHABu pres [Modbus Binding](https://www.openhab.org/addons/bindings/modbus/) (things, items, sitemap atd.) je v adresari [openhab](openhab).
 
-##### Vstupni tlak (Pa, vydelit 10):
-    mbpoll -a 20 -b 19200 -r 4023 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Vystupni tlak (Pa, vydelit 10):
-    mbpoll -a 20 -b 19200 -r 4024 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Nastaveny vstupni objem vzduchu (m3):
-    mbpoll -a 20 -b 19200 -r 4031 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Aktualni vstupni objem vzduchu (m3):
-    mbpoll -a 20 -b 19200 -r 4032 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Nastaveny vystupni objem vzduchu (m3):
-    mbpoll -a 20 -b 19200 -r 4041 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Aktualni vystupni objem vzduchu (m3):
-    mbpoll -a 20 -b 19200 -r 4042 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Stav bypassu:
-    mbpoll -a 20 -b 19200 -r 4050 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # 0: inicializovat / 1: otevřený / 2: zavřený / 3: otevřený / 4: zavřený / 255: chyba
-
-##### Stav filtru:
-    mbpoll -a 20 -b 19200 -r 4100 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # 0: není špinavý 1: špinavý
-
-##### Stav predehrivace:
-    mbpoll -a 20 -b 19200 -r 4060 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # 0: Inicializovat / 1: Neaktivní / 2: Aktivní / 3: Testovací režim
-
-##### Vykon predehrivace (%):
-    mbpoll -a 20 -b 19200 -r 4061 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Nevyvazenost:
-    mbpoll -a 20 -b 19200 -r 6033 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # 0: Nevyváženost nepovolena 1: nevyváženost povolena
-
-##### Odchylka nevyvazenosti privodu:
-    mbpoll -a 20 -b 19200 -r 6035 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # Hodnota je uvedena v procentech; 0 % znamená, že nebyla použita žádná korekce
-
-##### Odchylka nevyvazenosti odvodu:
-    mbpoll -a 20 -b 19200 -r 6036 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # Hodnota je uvedena v procentech; 0 % znamená, že nebyla použita žádná korekce
-
-##### Rezim bypassu:
-    mbpoll -a 20 -b 19200 -r 6100 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # 0: Automatický 1: Uzavřený obtok 2: Otevřený obtok
-
-##### Ovládání ModBus:
-    mbpoll -a 20 -b 19200 -r 8000 -t 4 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 2
-    
-    # 0: Ovládání ModBus vypnuté 1: Ovládací spínač ModBus 2: Hodnota ovládání průtoku ModBus
-
-##### Poloha spinace vykonu (cteni):
-    mbpoll -a 20 -b 19200 -r 8001 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # 0: nepřítomnost 1: nízké 2: normální 3: vysoké
-
-##### Navrhovaná změna polohy spínače výkonu (zapis):
-    mbpoll -a 20 -b 19200 -r 8001 -t 4 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 3
-
-    # 0: nepřítomnost 1: nízké 2: normální 3: vysoké
-    # Ovládání ModBus je nutné nastavit na 1 (přepínač)
-
-##### Prutok na jednotlive stupne:
-    # stupen 0 (nepritomnost):
-    mbpoll -a 20 -b 19200 -r 6000 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # stupen 1 (nizky):
-    mbpoll -a 20 -b 19200 -r 6001 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # stupen 2 (stredni):
-    mbpoll -a 20 -b 19200 -r 6002 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-    # stupen 3 (vysoky):
-    mbpoll -a 20 -b 19200 -r 6003 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Vlhkost vzduchu na vstupu:
-    mbpoll -a 20 -b 19200 -r 4037 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0
-
-##### Vlhkost vzduchu na vystupu:
-    mbpoll -a 20 -b 19200 -r 4047 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0    
-
-##### Pouziti filtru v hodinach
-    mbpoll -a 20 -b 19200 -r 4115 -t 3 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 
-
-##### Požadované nastavení průtoku vzduchu:
-    mbpoll -a 20 -b 19200 -r 8002 -t 4 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 200
-
-    # 0; 50–325
-    # Ovládání ModBus je nutné nastavit na 2 (hodnota průtoku)
-
-##### Výstraha resetování filtru:
-    mbpoll -a 20 -b 19200 -r 8010 -t 4 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 1
-
-    # 0: Bez resetu 1: Výstraha resetování filtru
+Prehled hodnot pro cteni/zapis je v tabulce [properties.csv](properties.csv).

@@ -1,0 +1,24 @@
+name,description,read address,read value type,read transform,write address,write value type,register type,poll interval
+input4032,Aktualni vstupni objem vzduchu,4032,uint16,,,,input,5000
+input4042,Aktualni vystupni objem vzduchu,4042,uint16,,,,input,5000
+input4023,Vstupni tlak,4023,uint16,,,,input,5000
+input4024,Vystupni tlak,4024,uint16,,,,input,5000
+holding6033,Nevyvazenost,6033,uint16,,6033,int16,holding,300000
+input4115,Pouziti filtru,4115,uint16,JS(hours2Days.js),,,input,300000
+input4100,Stav filtru,4100,uint16,,,,input,300000
+holding6000,Prutok na stupen 0,6000,uint16,,6000,int16,holding,5000
+holding6001,Prutok na stupen 1,6001,uint16,,6001,int16,holding,5000
+holding6002,Prutok na stupen 2,6002,uint16,,6002,int16,holding,5000
+holding6003,Prutok na stupen 3,6003,uint16,,6003,int16,holding,5000
+input4036,Teplota privadeneho vzduchu,4036,int16,JS(divide10.js),,,input,5000
+input4037,Relativni vlhkost vstupniho vzduchu,4037,uint16,,,,input,5000
+input4046,Teplota odpadniho vzduchu,4046,int16,JS(divide10.js),,,input,5000
+input4047,Relativni vlhkost vystupniho vzduchu,4047,uint16,,,,input,5000
+holding6100,Rezim bypassu,6100,uint16,,6100,int16,holding,300000
+input4050,Stav bypassu,4050,uint16,,,,input,5000
+input4060,Stav predehrivace,4060,uint16,,,,input,5000
+input4061,Vykon predehrivace,4061,uint16,,,,input,5000
+input4081,Venkovni teplota,4081,int16,JS(divide10.js),,,input,5000
+holding8000,Ovladani Modbus,8000,uint16,,8000,int16,holding,5000
+holding8001,Stupen vykonu,8001,uint16,,8001,int16,holding,5000
+holding8002,Hodnota prutoku,8002,uint16,,8002,int16,holding,5000

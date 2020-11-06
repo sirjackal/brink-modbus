@@ -1,0 +1,29 @@
+sitemap brink label="Brink" {
+    Frame label="Rekuperace" icon="pump" {
+        Text item=BrinkTempSupply
+        Text item=BrinkTempExhaust
+        Text item=BrinkTempOutdoor
+        Text item=BrinkFlowrateSupply
+        Text item=BrinkFlowrateExhaust
+        Text item=BrinkPressureSupply
+        Text item=BrinkPressureExhaust
+        Text item=BrinkHumidityInlet
+        Text item=BrinkHumidityExhaust
+        Selection item=BrinkBypassMode mappings=[0="automaticky", 1="uzavreny", 2="otevreny"]
+        Text item=BrinkBypassState valuecolor=[BrinkBypassState==1="red", ==3="red"]
+        Text item=BrinkFilterState valuecolor=[BrinkFilterState==1="red"]
+        Text item=BrinkPreheaterState
+        Text item=BrinkPreheaterPower
+        Text item=BrinkFiltersUsage
+        Switch item=BrinkImbalance mappings=[0="nepovolena", 1="povolena"]
+        Switch item=BrinkControlMode mappings=[0="vypnute", 1="stupen", 2="hodnota"]
+        Switch item=BrinkPowerLevel mappings=[0="0", 1="1", 2="2", 3="3"]
+        Setpoint item=BrinkFlowrateValue minValue=50 maxValue=275 step=5
+        Text item=RekuperacePrutoky label="Prutoky pro jednotlive stupne" icon="qualityofservice" {
+            Setpoint item=BrinkFlowrateLevel0 minValue=50 maxValue=275 step=5
+            Setpoint item=BrinkFlowrateLevel1 minValue=50 maxValue=275 step=5
+            Setpoint item=BrinkFlowrateLevel2 minValue=50 maxValue=275 step=5
+            Setpoint item=BrinkFlowrateLevel3 minValue=50 maxValue=275 step=5
+        }
+    }
+}
