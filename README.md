@@ -1,6 +1,8 @@
 # Brink Flair 300 Modbus control
 
-Ovladani rekuperacni jednotky Brink Flair 300 pres protokol Modbus.
+Ovladani rekuperacni jednotky [Brink Flair 300](https://www.brinkairshop.nl/nl-nl/producten/ventilatie/flair-(centrale-ventilatie)) pres protokol Modbus a jeji integrace do systemu [openHAB](https://www.openhab.org/).
+
+Nezkousel jsem to, ale pravdepodobne to bude stejne fungovat i s jednotkami Flair 325 a Flair 400.
 
 | Parametry spojeni    |                 |
 |------------------------|-----------------|
@@ -11,7 +13,7 @@ Ovladani rekuperacni jednotky Brink Flair 300 pres protokol Modbus.
 | Stop bits:             | 1               |
 
 ### Hardware:
-Raspberry Pi Model 3B+
+[Raspberry Pi Model 3B+](https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/?resellerType=home)
 
 ### Operacni system:
 https://www.openhab.org/docs/installation/openhabian.html \
@@ -77,5 +79,11 @@ Implementace v openHABu pres [Modbus Binding](https://www.openhab.org/addons/bin
 
 Prehled hodnot pro cteni/zapis je v tabulce [properties.csv](properties.csv).
 
+#### Upozorneni
+
+![4polohovy ovladac](img/switch_4position.jpg)
+
+Pokud pouzivate [4polohovy nastenny ovladac](https://www.brinkairshop.nl/nl-nl/producten/luchtverwarming/elektrische-luchtverwarming/elan-e-toebehoren/540262) pro nastaveni stupne vykonu jednotky (pripojeny pres konektor X14) a chcete zacit ridit vykon pres Modbus, je potreba ovladac odpojit. Hada se to spolu. Narazove vetrani (boost) problem neni.
+
 ### Ukazka zobrazeni v openHAB Basic UI
-![zobrazeni v openHAB Basic UI](openhab-ui.png)
+![zobrazeni v openHAB Basic UI](img/openhab-ui.png)
