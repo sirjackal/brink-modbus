@@ -1,67 +1,67 @@
 Bridge modbus:serial:brink [ port="/dev/ttyUSB0", id=20, baud=19200, dataBits=8, parity="even", stopBits="1", encoding="rtu" ] {
 	
 	Bridge poller flowrateSupply [ start=4032, length=1, refresh=5000, type="input" ] {
-		Thing data input4032 [ readStart="4032", readValueType="uint16" ] // Aktualni vstupni objem vzduchu
+		Thing data input4032 @ "Rekuperace" [ readStart="4032", readValueType="uint16" ] // Aktualni vstupni objem vzduchu
 	}
 
 	Bridge poller flowrateExhaust [ start=4042, length=1, refresh=5000, type="input" ] {
-		Thing data input4042 [ readStart="4042", readValueType="uint16" ] // Aktualni vystupni objem vzduchu
+		Thing data input4042 @ "Rekuperace" [ readStart="4042", readValueType="uint16" ] // Aktualni vystupni objem vzduchu
 	}
 
 	Bridge poller pressure [ start=4023, length=2, refresh=5000, type="input" ] {
-		Thing data input4023 [ readStart="4023", readValueType="uint16" ] // Vstupni tlak
-		Thing data input4024 [ readStart="4024", readValueType="uint16" ] // Vystupni tlak
+		Thing data input4023 @ "Rekuperace" [ readStart="4023", readValueType="uint16" ] // Vstupni tlak
+		Thing data input402 @ "Rekuperace" [ readStart="4024", readValueType="uint16" ] // Vystupni tlak
 	}
 
 	Bridge poller imbalance [ start=6033, length=1, refresh=300000, type="holding" ] {
-		Thing data holding6033 [ readStart="6033", readValueType="uint16", writeStart="6033", writeValueType="int16", writeType="holding" ] // Nevyvazenost
+		Thing data holding6033 @ "Rekuperace" [ readStart="6033", readValueType="uint16", writeStart="6033", writeValueType="int16", writeType="holding" ] // Nevyvazenost
 	}
 
 	Bridge poller filterUsage [ start=4115, length=1, refresh=300000, type="input" ] {
-		Thing data input4115 [ readStart="4115", readValueType="uint16", readTransform="JS(hours2Days.js)" ] // Pouziti filtru
+		Thing data input4115 @ "Rekuperace" [ readStart="4115", readValueType="uint16", readTransform="JS(hours2Days.js)" ] // Pouziti filtru
 	}
 
 	Bridge poller filterState [ start=4100, length=1, refresh=300000, type="input" ] {
-		Thing data input4100 [ readStart="4100", readValueType="uint16" ] // Stav filtru
+		Thing data input4100 @ "Rekuperace" [ readStart="4100", readValueType="uint16" ] // Stav filtru
 	}
 
 	Bridge poller levelFlowrate [ start=6000, length=4, refresh=5000, type="holding" ] {
-		Thing data holding6000 [ readStart="6000", readValueType="uint16", writeStart="6000", writeValueType="int16", writeType="holding" ] // Prutok na stupen 0
-		Thing data holding6001 [ readStart="6001", readValueType="uint16", writeStart="6001", writeValueType="int16", writeType="holding" ] // Prutok na stupen 1
-		Thing data holding6002 [ readStart="6002", readValueType="uint16", writeStart="6002", writeValueType="int16", writeType="holding" ] // Prutok na stupen 2
-		Thing data holding6003 [ readStart="6003", readValueType="uint16", writeStart="6003", writeValueType="int16", writeType="holding" ] // Prutok na stupen 3
+		Thing data holding6000 @ "Rekuperace" [ readStart="6000", readValueType="uint16", writeStart="6000", writeValueType="int16", writeType="holding" ] // Prutok na stupen 0
+		Thing data holding6001 @ "Rekuperace" [ readStart="6001", readValueType="uint16", writeStart="6001", writeValueType="int16", writeType="holding" ] // Prutok na stupen 1
+		Thing data holding6002 @ "Rekuperace" [ readStart="6002", readValueType="uint16", writeStart="6002", writeValueType="int16", writeType="holding" ] // Prutok na stupen 2
+		Thing data holding6003 @ "Rekuperace" [ readStart="6003", readValueType="uint16", writeStart="6003", writeValueType="int16", writeType="holding" ] // Prutok na stupen 3
 	}
 
 	Bridge poller airSupply [ start=4036, length=2, refresh=5000, type="input" ] {
-		Thing data input4036 [ readStart="4036", readValueType="int16", readTransform="JS(divide10.js)" ] // Teplota privadeneho vzduchu
-		Thing data input4037 [ readStart="4037", readValueType="uint16" ] // Relativni vlhkost vstupniho vzduchu
+		Thing data input4036 @ "Rekuperace" [ readStart="4036", readValueType="int16", readTransform="JS(divide10.js)" ] // Teplota privadeneho vzduchu
+		Thing data input4037 @ "Rekuperace" [ readStart="4037", readValueType="uint16" ] // Relativni vlhkost vstupniho vzduchu
 	}
 
 	Bridge poller airExhaust [ start=4046, length=2, refresh=5000, type="input" ] {
-		Thing data input4046 [ readStart="4046", readValueType="int16", readTransform="JS(divide10.js)" ] // Teplota odpadniho vzduchu
-		Thing data input4047 [ readStart="4047", readValueType="uint16" ] // Relativni vlhkost vystupniho vzduchu
+		Thing data input4046 @ "Rekuperace" [ readStart="4046", readValueType="int16", readTransform="JS(divide10.js)" ] // Teplota odpadniho vzduchu
+		Thing data input4047 @ "Rekuperace" [ readStart="4047", readValueType="uint16" ] // Relativni vlhkost vystupniho vzduchu
 	}
 
 	Bridge poller bypassMode [ start=6100, length=1, refresh=300000, type="holding" ] {
-		Thing data holding6100 [ readStart="6100", readValueType="uint16", writeStart="6100", writeValueType="int16", writeType="holding" ] // Rezim bypassu
+		Thing data holding6100 @ "Rekuperace" [ readStart="6100", readValueType="uint16", writeStart="6100", writeValueType="int16", writeType="holding" ] // Rezim bypassu
 	}
 
 	Bridge poller bypassState [ start=4050, length=1, refresh=5000, type="input" ] {
-		Thing data input4050 [ readStart="4050", readValueType="uint16" ] // Stav bypassu
+		Thing data input4050 @ "Rekuperace" [ readStart="4050", readValueType="uint16" ] // Stav bypassu
 	}
 
 	Bridge poller preheater [ start=4060, length=2, refresh=5000, type="input" ] {
-		Thing data input4060 [ readStart="4060", readValueType="uint16" ] // Stav predehrivace
-		Thing data input4061 [ readStart="4061", readValueType="uint16" ] // Vykon predehrivace
+		Thing data input4060 @ "Rekuperace" [ readStart="4060", readValueType="uint16" ] // Stav predehrivace
+		Thing data input4061 @ "Rekuperace" [ readStart="4061", readValueType="uint16" ] // Vykon predehrivace
 	}
 
 	Bridge poller tempOutdoor [ start=4081, length=1, refresh=5000, type="input" ] {
-		Thing data input4081 [ readStart="4081", readValueType="int16", readTransform="JS(divide10.js)" ] // Venkovni teplota
+		Thing data input4081 @ "Rekuperace" [ readStart="4081", readValueType="int16", readTransform="JS(divide10.js)" ] // Venkovni teplota
 	}
 
 	Bridge poller powerSettings [ start=8000, length=3, refresh=5000, type="holding" ] {
-		Thing data holding8000 [ readStart="8000", readValueType="uint16", writeStart="8000", writeValueType="int16", writeType="holding" ] // Ovladani Modbus
-		Thing data holding8001 [ readStart="8001", readValueType="uint16", writeStart="8001", writeValueType="int16", writeType="holding" ] // Stupen vykonu
-		Thing data holding8002 [ readStart="8002", readValueType="uint16", writeStart="8002", writeValueType="int16", writeType="holding" ] // Hodnota prutoku
+		Thing data holding8000 @ "Rekuperace" [ readStart="8000", readValueType="uint16", writeStart="8000", writeValueType="int16", writeType="holding" ] // Ovladani Modbus
+		Thing data holding8001 @ "Rekuperace" [ readStart="8001", readValueType="uint16", writeStart="8001", writeValueType="int16", writeType="holding" ] // Stupen vykonu
+		Thing data holding8002 @ "Rekuperace" [ readStart="8002", readValueType="uint16", writeStart="8002", writeValueType="int16", writeType="holding" ] // Hodnota prutoku
 	}
 }
