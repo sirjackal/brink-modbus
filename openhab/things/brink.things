@@ -10,7 +10,7 @@ Bridge modbus:serial:brink [ port="/dev/ttyUSB0", id=20, baud=19200, dataBits=8,
 
 	Bridge poller pressure [ start=4023, length=2, refresh=5000, type="input" ] {
 		Thing data input4023 @ "Rekuperace" [ readStart="4023", readValueType="uint16" ] // Vstupni tlak
-		Thing data input402 @ "Rekuperace" [ readStart="4024", readValueType="uint16" ] // Vystupni tlak
+		Thing data input4024 @ "Rekuperace" [ readStart="4024", readValueType="uint16" ] // Vystupni tlak
 	}
 
 	Bridge poller imbalance [ start=6033, length=1, refresh=300000, type="holding" ] {
