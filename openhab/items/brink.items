@@ -7,7 +7,12 @@ Number	BrinkPressureSupply	"Vstupni tlak [%d Pa]"	<pressure>	(Rekuperace)	{ chan
 Number	BrinkPressureExhaust	"Vystupni tlak [%d Pa]"	<pressure>	(Rekuperace)	{ channel="modbus:data:brink:pressure:input4024:number" }
 Number	BrinkHumidityInlet	"Relativni vlhkost vstupniho vzduchu [%d %%]"	<humidity>	(Rekuperace)	{ channel="modbus:data:brink:airSupply:input4037:number" }
 Number	BrinkHumidityExhaust	"Relativni vlhkost vystupniho vzduchu [%d %%]"	<humidity>	(Rekuperace)	{ channel="modbus:data:brink:airExhaust:input4047:number" }
-Number	BrinkBypassMode	"Rezim bypassu [MAP(brinkBypassMode.map):%s]"	(Rekuperace)	{ channel="modbus:data:brink:bypassMode:holding6100:number" }
+Number	BrinkBypassMode	"Rezim bypassu [MAP(brinkBypassMode.map):%s]"	(Rekuperace)	{ channel="modbus:data:brink:bypass:holding6100:number" }
+Number	BrinkBypassTempIndoor	"Min. teplota uvnitr [%.1f °C]" <temperature>	(Rekuperace)	{ channel="modbus:data:brink:bypass:holding6101:number" }
+Number	BrinkBypassTempOutdoor	"Min. teplota venku [%.1f °C]" <temperature>	(Rekuperace)	{ channel="modbus:data:brink:bypass:holding6102:number" }
+Number	BrinkBypassHysteresis	"Hystereze [%.1f °C]" <temperature>	(Rekuperace)	{ channel="modbus:data:brink:bypass:holding6103:number" }
+Number	BrinkBypassBoost	"Boost"	(Rekuperace)	{ channel="modbus:data:brink:bypass:holding6104:number" }
+Number	BrinkBypassBoostFlowrateLevel	"Boost stupen" <heating>	(Rekuperace)	{ channel="modbus:data:brink:bypass:holding6105:number" }
 Number	BrinkBypassState	"Stav bypassu [MAP(brinkBypassPosition.map):%s]"	(Rekuperace)	{ channel="modbus:data:brink:bypassState:input4050:number" }
 Number	BrinkFilterState	"Stav filtru [MAP(brinkFilterState.map):%s]"	<filter>	(Rekuperace)	{ channel="modbus:data:brink:filterState:input4100:number" }
 Number	BrinkPreheaterState	"Stav predehrivace [MAP(brinkPreheaterState.map):%s]"	(Rekuperace)	{ channel="modbus:data:brink:preheater:input4060:number" }

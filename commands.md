@@ -65,6 +65,21 @@
 
     # 0: Automatický 1: Uzavřený obtok 2: Otevřený obtok
 
+##### Bypass - min. teplota uvnitr:
+    mbpoll -a 20 -b 19200 -r 6101 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0    
+
+##### Bypass - min. teplota venku:
+    mbpoll -a 20 -b 19200 -r 6102 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0        
+
+##### Bypass - hystereze:
+    mbpoll -a 20 -b 19200 -r 6103 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0        
+
+##### Bypass - boost:
+    mbpoll -a 20 -b 19200 -r 6104 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0        
+
+##### Bypass - stupen vykonu pri boostu:
+    mbpoll -a 20 -b 19200 -r 6105 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0        
+
 ##### Ovládání ModBus:
     mbpoll -a 20 -b 19200 -r 8000 -t 4 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0 2
     

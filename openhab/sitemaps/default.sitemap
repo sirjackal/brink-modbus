@@ -9,7 +9,6 @@ sitemap brink label="Brink" {
         Text item=BrinkPressureExhaust
         Text item=BrinkHumidityInlet
         Text item=BrinkHumidityExhaust
-        Selection item=BrinkBypassMode mappings=[0="automaticky", 1="uzavreny", 2="otevreny"]
         Text item=BrinkBypassState valuecolor=[BrinkBypassState==1="red", ==3="red"]
         Text item=BrinkFilterState valuecolor=[BrinkFilterState==1="red"]
         Text item=BrinkPreheaterState
@@ -24,6 +23,14 @@ sitemap brink label="Brink" {
             Setpoint item=BrinkFlowrateLevel1 minValue=50 maxValue=275 step=5
             Setpoint item=BrinkFlowrateLevel2 minValue=50 maxValue=275 step=5
             Setpoint item=BrinkFlowrateLevel3 minValue=50 maxValue=275 step=5
+        }
+        Text item=RekuperaceBypass label="Nastaveni bypassu" icon="snow" {
+            Selection item=BrinkBypassMode mappings=[0="automaticky", 1="uzavreny", 2="otevreny"]
+            Setpoint item=BrinkBypassTempIndoor minValue=150 maxValue=350 step=5
+            Setpoint item=BrinkBypassTempOutdoor minValue=70 maxValue=150 step=5
+            Setpoint item=BrinkBypassHysteresis minValue=0 maxValue=50 step=5
+            Switch item=BrinkBypassBoost mappings=[0="vypnuty", 1="zapnuty"]
+            Switch item=BrinkBypassBoostFlowrateLevel mappings=[0="0", 1="1", 2="2", 3="3"]
         }
     }
 }

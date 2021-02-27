@@ -42,8 +42,13 @@ Bridge modbus:serial:brink [ port="/dev/ttyUSB0", id=20, baud=19200, dataBits=8,
 		Thing data input4047 @ "Rekuperace" [ readStart="4047", readValueType="uint16" ] // Relativni vlhkost vystupniho vzduchu
 	}
 
-	Bridge poller bypassMode [ start=6100, length=1, refresh=300000, type="holding" ] {
+	Bridge poller bypass [ start=6100, length=6, refresh=300000, type="holding" ] {
 		Thing data holding6100 @ "Rekuperace" [ readStart="6100", readValueType="uint16", writeStart="6100", writeValueType="int16", writeType="holding" ] // Rezim bypassu
+		Thing data holding6101 @ "Rekuperace" [ readStart="6101", readValueType="uint16", readTransform="JS(divide10.js)", writeStart="6101", writeValueType="int16", writeType="holding" ] // Min. teplota uvnitr
+		Thing data holding6102 @ "Rekuperace" [ readStart="6102", readValueType="uint16", readTransform="JS(divide10.js)", writeStart="6102", writeValueType="int16", writeType="holding" ] // Min. teplota venku
+		Thing data holding6103 @ "Rekuperace" [ readStart="6103", readValueType="uint16", readTransform="JS(divide10.js)", writeStart="6103", writeValueType="int16", writeType="holding" ] // Hystereze
+		Thing data holding6104 @ "Rekuperace" [ readStart="6104", readValueType="uint16", writeStart="6104", writeValueType="int16", writeType="holding" ] // Boost
+		Thing data holding6105 @ "Rekuperace" [ readStart="6105", readValueType="uint16", writeStart="6105", writeValueType="int16", writeType="holding" ] // Stupen vykonu pri boostu
 	}
 
 	Bridge poller bypassState [ start=4050, length=1, refresh=5000, type="input" ] {
