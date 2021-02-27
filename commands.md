@@ -77,6 +77,8 @@
 ##### Bypass - boost:
     mbpoll -a 20 -b 19200 -r 6104 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0        
 
+    # 0: vypnutý 1: zapnutý
+
 ##### Bypass - stupen vykonu pri boostu:
     mbpoll -a 20 -b 19200 -r 6105 -t 4 -c 1 -v -m rtu -d 8 -p even -1 -0 /dev/ttyUSB0        
 
