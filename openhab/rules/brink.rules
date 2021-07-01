@@ -54,3 +54,11 @@ then
 	BrinkControlMode.sendCommand("1") // ovladaci spinac Modbus
 	BrinkPowerLevel.sendCommand("1")
 end
+
+rule "Refresh filter state and usage"
+when
+	Item BrinkFilterWarningReset received command
+then
+	BrinkFilterState.sendCommand(RefreshType.REFRESH)
+	BrinkFiltersUsage.sendCommand(RefreshType.REFRESH)
+end

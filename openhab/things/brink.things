@@ -69,4 +69,8 @@ Bridge modbus:serial:brink [ port="/dev/ttyUSB0", id=20, baud=19200, dataBits=8,
 		Thing data holding8001 @ "Rekuperace" [ readStart="8001", readValueType="uint16", writeStart="8001", writeValueType="int16", writeType="holding" ] // Stupen vykonu
 		Thing data holding8002 @ "Rekuperace" [ readStart="8002", readValueType="uint16", writeStart="8002", writeValueType="int16", writeType="holding" ] // Hodnota prutoku
 	}
+
+	Bridge poller filterWarningReset [ start=8010, length=1, refresh=300000, type="holding" ] {
+		Thing data holding8010 @ "Rekuperace" [ writeStart="8010", writeValueType="int16", writeType="holding" ] // Reset vystrahy filtru
+	}
 }

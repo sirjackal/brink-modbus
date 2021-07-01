@@ -26,3 +26,4 @@ Number	BrinkFlowrateLevel3	"Prutok na stupen 3 (vysoky) [%d m³/h]"	<flow>	(Reku
 Number	BrinkControlMode	"Ovladani vykonu"	(Rekuperace)	{ channel="modbus:data:brink:powerSettings:holding8000:number" }
 Number	BrinkPowerLevel	"Stupen vykonu"	<heating>	(Rekuperace)	{ channel="modbus:data:brink:powerSettings:holding8001:number" }
 Number	BrinkFlowrateValue	"Hodnota prutoku [%d m³/h]"	<flow>	(Rekuperace)	{ channel="modbus:data:brink:powerSettings:holding8002:number" }
+Number	BrinkFilterWarningReset	"Reset vystrahy filtru"	<siren>	(Rekuperace)	{ channel="modbus:data:brink:filterWarningReset:holding8010:number" }

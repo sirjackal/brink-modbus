@@ -32,5 +32,6 @@ sitemap brink label="Brink" {
             Switch item=BrinkBypassBoost mappings=[0="vypnuty", 1="zapnuty"]
             Switch item=BrinkBypassBoostFlowrateLevel mappings=[0="0", 1="1", 2="2", 3="3"]
         }
+        Switch item=BrinkFilterWarningReset mappings=[1="resetovat"]
     }
 }
