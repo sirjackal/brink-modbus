@@ -1,2 +1,2 @@
-Contact JablotronSecured "Alarm [MAP(jablotron.map):%s]" <lock> { gpio="pin:26 debounce:10 activelow:yes" }
+Switch JablotronSecured "Alarm [MAP(jablotron.map):%s]" <lock> {channel="gpio:pigpio-remote:default:jablotron-alarm"}
 

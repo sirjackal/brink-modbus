@@ -1,0 +1,4 @@
+Thing gpio:pigpio-remote:default "GPIO" [host="127.0.0.1", port=8888] {
+	Channels:
+		Type pigpio-digital-input : jablotron-alarm [gpioId=26, invert=false, debouncingTime=10, pullupdown="DOWN"]
+}

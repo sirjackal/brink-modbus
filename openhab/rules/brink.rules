@@ -41,7 +41,7 @@ end
 
 rule "Decrease ventilation level when Jablotron is secured"
 when
-	Item JablotronSecured changed to CLOSED
+	Item JablotronSecured changed to ON
 then
 	BrinkControlMode.sendCommand("1") // ovladaci spinac Modbus
 	BrinkPowerLevel.sendCommand("0")
@@ -49,7 +49,7 @@ end
 
 rule "Increase ventilation level when Jablotron is unsecured"
 when
-	Item JablotronSecured changed to OPEN
+	Item JablotronSecured changed to OFF
 then
 	BrinkControlMode.sendCommand("1") // ovladaci spinac Modbus
 	BrinkPowerLevel.sendCommand("1")
