@@ -1,4 +1,4 @@
-Bridge modbus:serial:brink [ port="/dev/ttyUSB0", id=20, baud=19200, dataBits=8, parity="even", stopBits="1", encoding="rtu" ] {
+Bridge modbus:serial:brink [ port="/dev/ttyUSB0", id=20, baud=19200, dataBits=8, parity="even", stopBits="1.0", encoding="rtu" ] {
 	
 	Bridge poller flowrateSupply [ start=4032, length=1, refresh=5000, type="input" ] {
 		Thing data input4032 @ "Rekuperace" [ readStart="4032", readValueType="uint16" ] // Aktualni vstupni objem vzduchu
